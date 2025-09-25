@@ -1,10 +1,8 @@
 pipeline {
     agent any
     environment {
-        // Update these paths to match your system
-        JAVA_HOME = "C:\\Program Files\\Java\\jdk-17" 
-        MAVEN_HOME = "C:\\apache-maven-3.9.6"
-
+        JAVA_HOME = "C:\\Program Files\\Java\\jdk-21"
+        MAVEN_HOME = "C:\\Program Files\\Apache\\Maven\\apache-maven-3.9.11"
         PATH = "${JAVA_HOME}\\bin;${MAVEN_HOME}\\bin;${env.PATH}"
     }
     stages {
@@ -21,4 +19,3 @@ pipeline {
         }
     }
 }
-
