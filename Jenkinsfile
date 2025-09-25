@@ -1,37 +1,24 @@
 pipeline {
     agent any
+    environment {
+        // Update these paths to match your system
+        JAVA_HOME = "C:\\Program Files\\Java\\jdk-17" 
+        MAVEN_HOME = "C:\\apache-maven-3.9.6"
 
-    tools {
-        jdk "JDK"         // Make sure JDK is configured in Jenkins
-        maven "Maven"     // Make sure Maven is configured in Jenkins
+        PATH = "${JAVA_HOME}\\bin;${MAVEN_HOME}\\bin;${env.PATH}"
     }
-
     stages {
-        stage('Checkout') {
+        stage('Check Versions') {
             steps {
-                git branch: 'main', url: 'https://github.com/Marampudi-vineetha32887/Expenses-Tracker.git'
+                bat 'java -version'
+                bat 'mvn -version'
             }
         }
-
         stage('Build') {
             steps {
                 bat 'mvn clean install'
             }
         }
-
-        stage('Run App') {
-            steps {
-                bat 'mvn spring-boot:run'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build and run successful!'
-        }
-        failure {
-            echo 'Build failed!'
-        }
     }
 }
+
